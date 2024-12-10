@@ -5,73 +5,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FeelSync - Welcome</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Tangerine:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/welcome.css}">
     <style>
-        body {
+        :root {
+            --light-olive: #DAD7CD;
+            --olive-green: #588157;
+            --dark-olive: #3A5A40;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
             font-family: 'Cormorant Garamond', serif;
-            background-color: #DAD7CD;
+            background: linear-gradient(135deg, var(--light-olive), var(--dark-olive));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        .welcome-container {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
             text-align: center;
+            color: white;
         }
-        .welcome-container {
-            background-color: #A3B18A;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(52, 78, 65, 0.1);
-        }
+
         .logo {
-            color: #3A5A40;
-            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
+
+        .button-container {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
         .btn {
             display: inline-block;
-            background-color: #588157;
-            color: white;
-            padding: 10px 20px;
+            padding: 15px 30px;
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
+            color: white;
             font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
+            font-size: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
+
         .btn-login {
-            background-color: #3A5A40;
+            background-color: var(--olive-green);
         }
+
         .btn-signup {
-            background-color: #588157;
+            background-color: var(--dark-olive);
         }
-        .quote-container {
-            margin-top: 20px;
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.2);
         }
+
         .quote {
             font-family: 'Tangerine', cursive;
-            font-size: 24px;
-            color: #3A5A40;
+            font-size: 36px;
+            color: var(--light-olive);
+            max-width: 80%;
+            opacity: 0;
+            animation: fadeInLeft 1.5s forwards;
+        }
+
+        @keyframes fadeInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .quote {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="welcome-container">
-        <header>
-            <h1 class="logo">Feel Sync</h1>
-        </header>
+        <h1 class="logo">Feel Sync</h1>
         
-        <main>
-            <div class="button-container">
-                <a href="/login" class="btn btn-login">Login</a>
-                <a href="/signup" class="btn btn-signup">Sign Up</a>
-            </div>
-            
-            <div class="quote-container">
-                <p class="quote">Empower Yourself, Track Your Moods, and Unleash a Happier You</p>
-            </div>
-        </main>
+        <div class="button-container">
+            <a href="/login" class="btn btn-login">Login</a>
+            <a href="/signup" class="btn btn-signup">Sign Up</a>
+        </div>
+        
+        <p class="quote">Empower Yourself, Track Your Moods, and Unleash a Happier You</p>
     </div>
 
-    <script th:src="@{/js/welcome.js}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const quote = document.querySelector('.quote');
+            const buttons = document.querySelectorAll('.btn');
+
+            // Subtle hover effect for quote
+            quote.addEventListener('mouseenter', () => {
+                quote.style.textDecoration = 'underline';
+                quote.style.color = '#588157';
+            });
+
+            quote.addEventListener('mouseleave', () => {
+                quote.style.textDecoration = 'none';
+                quote.style.color = '#DAD7CD';
+            });
+
+            // Button hover animations
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    button.style.transform = 'scale(1.05)';
+                    button.style.boxShadow = '0 6px 8px rgba(0,0,0,0.2)';
+                });
+
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'scale(1)';
+                    button.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
