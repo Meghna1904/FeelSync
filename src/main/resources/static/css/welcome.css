@@ -1,0 +1,107 @@
+:root {
+    --light-olive: #DAD7CD;
+    --olive-green: #588157;
+    --dark-olive: #3A5A40;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(135deg, var(--light-olive), var(--dark-olive));
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+header {
+    margin-bottom: 2rem;
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 3rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.button-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    text-decoration: none;
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-login {
+    background-color: var(--olive-green);
+}
+
+.btn-signup {
+    background-color: var(--dark-olive);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+}
+
+.quote-container {
+    max-width: 80%;
+}
+
+.quote {
+    font-family: 'Tangerine', cursive;
+    font-size: 36px;
+    color: var(--light-olive);
+    opacity: 0;
+    animation: fadeInLeft 1.5s forwards;
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .quote {
+        font-size: 28px;
+    }
+}

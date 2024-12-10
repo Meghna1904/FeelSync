@@ -2,8 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to FeelSync</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeelSync - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/welcome.css}">
     <style>
         body {
             font-family: 'Cormorant Garamond', serif;
@@ -21,7 +23,7 @@
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(52, 78, 65, 0.1);
         }
-        h1 {
+        .logo {
             color: #3A5A40;
             font-weight: 600;
         }
@@ -36,13 +38,40 @@
             font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
         }
+        .btn-login {
+            background-color: #3A5A40;
+        }
+        .btn-signup {
+            background-color: #588157;
+        }
+        .quote-container {
+            margin-top: 20px;
+        }
+        .quote {
+            font-family: 'Tangerine', cursive;
+            font-size: 24px;
+            color: #3A5A40;
+        }
     </style>
 </head>
 <body>
     <div class="welcome-container">
-        <h1>Welcome to FeelSync!</h1>
-        <p>Get ready to track your mood and plan your day.</p>
-        <a href="/setup" class="btn">Start Your Journey</a>
+        <header>
+            <h1 class="logo">Feel Sync</h1>
+        </header>
+        
+        <main>
+            <div class="button-container">
+                <a href="/login" class="btn btn-login">Login</a>
+                <a href="/signup" class="btn btn-signup">Sign Up</a>
+            </div>
+            
+            <div class="quote-container">
+                <p class="quote">Empower Yourself, Track Your Moods, and Unleash a Happier You</p>
+            </div>
+        </main>
     </div>
+
+    <script th:src="@{/js/welcome.js}"></script>
 </body>
 </html>
