@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeelSync - Authentication</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="form-section">
+            <div class="logo">
+                <h1>FeelSync</h1>
+            </div>
+
+            <!-- Login Form -->
+            <form th:action="@{/login}" th:object="${loginRequest}" method="post" class="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" th:field="*{email}" required>
+                    <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" th:field="*{password}" required>
+                        <button type="button" class="password-toggle" onclick="togglePasswordVisibility('password')">
+                            <img th:src="@{/images/eye-icon.png}" alt="Toggle Password Visibility">
+                        </button>
+                    </div>
+                    <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                </div>
+                
+                <div class="remember-forgot">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember-me" name="remember-me">
+                        <label for="remember-me">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="btn-login">Log In</button>
+                
+                <div class="signup-link">
+                    New here? <a href="#" onclick="toggleSignup()">Sign Up</a>
+                </div>
+            </form>
+
+            <!-- Signup Form (Hidden by default) -->
+            <form th:action="@{/signup}" th:object="${signupRequest}" method="post" class="login-form" style="display:none;">
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" th:field="*{fullName}" required>
+                    <span class="error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" th:field="*{email}" required>
+                    <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="signup-password" th:field="*{password}" required>
+                        <button type="button" class="password-toggle" onclick="togglePasswordVisibility('signup-password')">
+                            <img th:src="@{/images/eye-icon.png}" alt="Toggle Password Visibility">
+                        </button>
+                    </div>
+                    <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirm-password" th:field="*{confirmPassword}" required>
+                        <button type="button" class="password-toggle" onclick="togglePasswordVisibility('confirm-password')">
+                            <img th:src="@{/images/eye-icon.png}" alt="Toggle Password Visibility">
+                        </button>
+                    </div>
+                    <span class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+                </div>
+                
+                <button type="submit" class="btn-login">Sign Up</button>
+                
+                <div class="signup-link">
+                    Already have an account? <a href="#" onclick="toggleLogin()">Log In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function togglePasswordVisibility(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        }
+
+        function toggleSignup() {
+            document.querySelector('.login-form:first-of-type').style.display = 'none';
+            document.querySelector('.login-form:last-of-type').style.display = 'block';
+        }
+
+        function toggleLogin() {
+            document.querySelector('.login-form:first-of-type').style.display = 'block';
+            document.querySelector('.login-form:last-of-type').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+com\feelsync\controller\AuthController.class
+com\feelsync\FeelSyncApplication.class
+com\feelsync\dto\SignupRequest.class
+com\feelsync\dto\LoginRequest.class
